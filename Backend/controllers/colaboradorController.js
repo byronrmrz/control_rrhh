@@ -43,9 +43,8 @@ const getAllColaboradores = async (req, res) => {
 }
 
 const actualizarColaborador = async (req,res) => {
-    const {empleado_id} = req.params;
-    const datos = req.body;
-    console.log('empleado: ', empleado_id)
+  const {empleado_id}  = req.params;
+  const datos = req.body;
     try{
         const result = await updateColaborador(empleado_id, datos);
     if (result.affectedRows === 0) {

@@ -5,7 +5,7 @@ const router = require('express').Router();
 
 router.post('/crearColaborador', createColaborador);
 router.get('/traerColaboradores', getAllColaboradores);
-router.put('/actualizarColaborador/:colaborador_id', actualizarColaborador);
+router.put('/actualizarColaborador/:empleado_id', actualizarColaborador);
 
 
 

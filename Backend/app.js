@@ -4,7 +4,6 @@ const location = require('./routes/locationRoute');
 const empresa = require('./routes/empresaRoute');
 const colaborador = require('./routes/colaboradorRoute');
 
-
 const app = express();
 const port = process.env.PORT || 3000;
 app.use(cors());
