@@ -53,9 +53,11 @@ npm start
 
 
 Frontend
+```bash
 cd frontend
 npm install
 npm run dev
+```
 
 Configuración de Base de datos:
 Se sube .env para mejor uso
