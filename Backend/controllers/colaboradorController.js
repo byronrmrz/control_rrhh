@@ -37,7 +37,7 @@ const getAllColaboradores = async (req, res) => {
         res.status(201).json({colaboradores})
 
     }catch(err){
-        res.status(400).json({message: "Error trayendo empresa", err})
+        res.status(400).json({message: "Error trayendo Colaboradores", err})
 
     }
 }

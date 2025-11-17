@@ -1,4 +1,4 @@
-const { createEmpresaDb,getEmpresasDb, updateEmpresa,} = require('../models/empresaModel');
+const { createEmpresaDb,getEmpresasDb, updateEmpresa,getAllEmpresasDb} = require('../models/empresaModel');
 
 const createEmpresa = async (req, res) => {
   const { pais_id, departamento_id, municipio_id, nit, razon_social, nombre_comercial, telefono, correo, direccion } = req.body;
@@ -46,6 +46,22 @@ const getEmpresaPorPais = async (req, res) => {
 
     }
 }
+const getEmpresas = async (req, res) => {
+    try{
+        const empresas = await getAllEmpresasDb();
+        if(!empresas || empresas.length === 0)
+        {
+            return res.status(201).json({message: "No hay empresas creadas"})
+
+        }
+        res.status(201).json({empresas})
+
+    }catch(err){
+        res.status(400).json({message: "Error trayendo empresas", err})
+
+    }
+}
+
 
 const actualizarEmpresa = async (req,res) => {
     const {empresa_id} = req.params;
@@ -74,5 +90,5 @@ const actualizarEmpresa = async (req,res) => {
 
 
 
-module.exports = {createEmpresa,getEmpresaPorPais,actualizarEmpresa}
+module.exports = {createEmpresa,getEmpresaPorPais,actualizarEmpresa,getEmpresas}
 

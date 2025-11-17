@@ -21,6 +21,16 @@ const getEmpresasDb = async(pais_id) =>{
     })
 }
 
+const getAllEmpresasDb = async(pais_id) =>{
+  const sql = "SELECT * FROM empresa WHERE  is_active = 1"
+    return new Promise((resolve, reject) => {
+      db.query(sql, [pais_id],(err, result)=>{
+        if(err)return reject(err)
+        resolve(result);
+      })
+    })
+}
+
 const updateEmpresa = async (empresa_id, nuevaData) => {
   const sql = "UPDATE empresa SET ? WHERE empresa_id = ?";
 
@@ -37,4 +47,5 @@ module.exports = {
   createEmpresaDb,
   getEmpresasDb,
   updateEmpresa,
+  getAllEmpresasDb
 };

@@ -12,7 +12,21 @@ const createColaboradorDb = async (colaborador) => {
 };
 
 const getColaboradoresDb = async() =>{
-  const sql = "SELECT * FROM colaborador WHERE is_active = 1"
+  const sql = `
+    SELECT
+    c.empleado_id,
+    c.nombre,
+    c.edad,
+    c.nit,
+    c.telefono,
+    c.correo,
+    c.empresa_id,
+    e.nombre_comercial AS empresa,
+    c.is_active
+    FROM colaborador c
+    INNER JOIN empresa e ON c.empresa_id = e.empresa_id
+    WHERE c.is_active = 1
+  `;
     return new Promise((resolve, reject) => {
       db.query(sql,(err, result)=>{
         if(err)return reject(err)
