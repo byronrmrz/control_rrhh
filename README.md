@@ -43,10 +43,14 @@ Clonar este repositorio
 
 git clone <https://github.com/byronrmrz/control_rrhh.git>
 
+
 Backend:
+```bash
 cd backend
 npm install
 npm start
+```
+
 
 Frontend
 cd frontend
