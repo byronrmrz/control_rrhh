@@ -1,4 +1,4 @@
-const { createCountryDb,createDeptoDb,createMunicipioDb,getAllCountries,getAllDeptos,getAllMunicipios,delCountry,delDepartamento,delMunicipio } = require('../models/locationModel');
+const { createCountryDb,createDeptoDb,createMunicipioDb,getAllCountries,getAllDeptos,getAllMunicipios,delCountry,delDepartamento,delMunicipio, updPais, updDepartamento, updMunicipio } = require('../models/locationModel');
 
 const createCountry = async(req, res) => {
     const body = req.body;
@@ -10,7 +10,6 @@ const createCountry = async(req, res) => {
         const result = await createCountryDb(nombre);
         res.status(201).json({message: "País creado correctamente",country_id: result.insertId,nombre
 })
-        console.log('País Creado: ', nombre)
     }catch(err){
     console.log(err);
     res.status(500).json({ message: 'Error creando el país', error: err.message });
@@ -19,7 +18,6 @@ const createCountry = async(req, res) => {
 
 const createDepto = async(req,res)=>{
     const body = req.body;
-
     try{
         const {departamento, pais_id} = body;
 
@@ -87,6 +85,7 @@ const getMunicipios = async(req,res)=>{
 
 const deleteCountry = async (req,res)=>{
     const {pais_id} = req.params;
+
     try{
         const deleted = await delCountry(pais_id)
             res.status(200).json({
@@ -139,8 +138,69 @@ const deleteMunicipio = async (req, res) => {
     }
 };
 
+const actualizarPais = async (req, res) => {
+    const { pais_id } = req.params;
+
+    const nuevaData = req.body; 
+    try {
+        const updated = await updPais(pais_id,nuevaData);
+
+        res.status(200).json({
+            message: "Pais actualizado correctamente",
+            pais_id,
+            affected_rows: updated.affectedRows
+        });
+
+    } catch (err) {
+        res.status(500).json({
+            message: "Error actualizando país",
+            error: err.message
+        });
+    }
+};
+
+const actualizarDepartamento = async (req, res) => {
+    const { departamento_id } = req.params;
+    const data = req.body;
+
+    try {
+        const updated = await updDepartamento(departamento_id, data);
+
+        res.status(200).json({
+            message: "Departamento actualizado correctamente",
+            departamento_id,
+            affected_rows: updated.affectedRows
+        });
+
+    } catch (err) {
+        res.status(500).json({
+            message: "Error inactivando departamento",
+            error: err.message
+        });
+    }
+};
+
+const actualizarMunicipio = async (req, res) => {
+    const { municipio_id } = req.params;
+    const data = req.body
+
+    try {
+        const updated = await updMunicipio(municipio_id, data);
+
+        res.status(200).json({
+            message: "Municipio actualizado correctamente",
+            municipio_id,
+            affected_rows: updated.affectedRows
+        });
+
+    } catch (err) {
+        res.status(500).json({
+            message: "Error actualizando municipio",
+            error: err.message
+        });
+    }
+};
 
 
 
-
-module.exports = {createCountry, createDepto,createMunicipio,getCountries,getDeptos,getMunicipios,deleteCountry,deleteDepartamento,deleteMunicipio}
+module.exports = {createCountry, createDepto,createMunicipio,getCountries,getDeptos,getMunicipios,deleteCountry,deleteDepartamento,deleteMunicipio,actualizarPais,actualizarDepartamento,actualizarMunicipio}

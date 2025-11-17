@@ -164,6 +164,36 @@ const delMunicipio = async (municipio_id) => {
     });
 };
 
+  const updPais = async (pais_id, nuevaData) => {
+  const sql = "UPDATE pais SET ? WHERE pais_id = ?";
+  return new Promise((resolve, reject) => {
+    db.query(sql, [nuevaData, pais_id], (err, result) => {
+      if (err) return reject(err);
+      resolve(result);
+    });
+  });
+};
+
+
+  const updDepartamento = async (departamento_id, nuevaData) => {
+  const sql = "UPDATE departamento SET ? WHERE departamento_id = ?";
+  return new Promise((resolve, reject) => {
+    db.query(sql, [nuevaData, departamento_id], (err, result) => {
+      if (err) return reject(err);
+      resolve(result);
+    });
+  });
+};
+
+  const updMunicipio = async (municipio_id, nuevaData) => {
+  const sql = "UPDATE municipio SET ? WHERE municipio_id = ?";
+  return new Promise((resolve, reject) => {
+    db.query(sql, [nuevaData, municipio_id], (err, result) => {
+      if (err) return reject(err);
+      resolve(result);
+    });
+  });
+};
 
 module.exports = {
   createCountryDb,
@@ -174,5 +204,8 @@ module.exports = {
   getAllMunicipios,
   delCountry,
   delDepartamento,
-  delMunicipio
+  delMunicipio,
+  updPais, 
+  updDepartamento, 
+  updMunicipio
 };

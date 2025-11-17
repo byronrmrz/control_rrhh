@@ -9,6 +9,8 @@ import {
 import Modal from "../components/ui/Modal";
 import Button from "../components/ui/Button";
 import FormBase from "../components/forms/Form";
+import Swal from "sweetalert2";
+
 
 export default function Colabordores() {
   const [colaboradores, setColaboradores] = useState([]);
@@ -130,6 +132,28 @@ const load = async () => {
     load();
   };
 
+  const confirmDelete = (colab) => {
+    Swal.fire({
+      title: "¿Está seguro?",
+      text: `Se eliminará el colaborador: ${colab.nombre}`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Sí, eliminar",
+      cancelButtonText: "Cancelar",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        await handleDelete(colab);
+        Swal.fire(
+          "Eliminado",
+          "El colaborador hasido eliminado exitosamente.",
+          "success"
+        );
+      }
+    });
+  };
+
   const handleDelete = async (e) => {
     const data = {
       is_active: 0,
@@ -162,10 +186,8 @@ const load = async () => {
           setSelectedColab(colab);
           setIsOpen(true);
         }}
-        onDelete={(colab) => {
-          setSelectedColab(colab);
-          handleDelete(colab);
-        }}
+         onDelete={(colab) => confirmDelete(colab)}
+
       />
 
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>

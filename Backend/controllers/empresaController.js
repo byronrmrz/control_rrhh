@@ -18,7 +18,6 @@ const createEmpresa = async (req, res) => {
      
     };
 
-    console.log('empresa: ', empresa)
 
     await createEmpresaDb(empresa);
     res.status(201).json({message: "Empresa creada correctamente", empresa})

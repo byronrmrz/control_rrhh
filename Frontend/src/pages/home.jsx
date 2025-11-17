@@ -12,22 +12,22 @@ export default function Home() {
       </p>
 
       <div className="grid grid-cols-3 justify-items-center">
-        <CardButton
-          icon={<FaUser size={100} />}
-          title="Colaboradores"
+        <CardButton 
+          icon={<FaUser size={100} className="text-primary"/>}
+          title="Colaboradores" 
           onClick={() => navigate("/colaboradores")}
         />
 
         <CardButton
-          icon={<FaBuilding size={100} />}
+          icon={<FaBuilding size={100} className="text-primary" />}
           title="Empresas"
           onClick={() => navigate("/empresas")}
         />
 
         <CardButton
-          icon={<FaGlobe size={100} />}
+          icon={<FaGlobe size={100}  className="text-primary"/>}
           title="Ubicaciones"
-          onClick={() => navigate("/home")}
+          onClick={() => navigate("/locations")}
         />
       </div>
     </div>
